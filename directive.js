@@ -18,6 +18,7 @@ function register (angular) {
       var dragulaScope = scope.dragulaScope || scope.$parent;
       var container = elem[0];
       var name = scope.$eval(attrs.dragula);
+      var options = scope.$eval(attrs.options);
       var drake;
 
       var bag = dragulaService.find(dragulaScope, name);
@@ -25,9 +26,8 @@ function register (angular) {
         drake = bag.drake;
         drake.containers.push(container);
       } else {
-        drake = dragula({
-          containers: [container]
-        });
+        options.containers = [container];
+        drake = dragula(options);
         dragulaService.add(dragulaScope, name, drake);
       }
 
